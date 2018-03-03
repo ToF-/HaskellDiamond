@@ -5,8 +5,6 @@ diamond c = mirror (map mirror (chain c))
 
 mirror xs = xs ++ tail (reverse xs)
 
-chain 'A' = ["A"]
-chain 'B' = [" A","B "]
-chain 'C' = zipWith pad [0..] ['A'..'C']
-    where l = ord 'C' - ord 'A'
+chain c = zipWith pad [0..] ['A'..c]
+    where l = ord c - ord 'A'
           pad n c = drop n (replicate l ' ' ++ [c] ++ replicate n ' ') 
