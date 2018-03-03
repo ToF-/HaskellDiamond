@@ -1,7 +1,7 @@
 module Diamond where
 
-diamond 'A' = mirror ["A"]
-diamond 'B' = mirror [" A " ,"B B"]
-diamond 'C' = mirror ["  A  " ," B B " ,"C   C"] 
+diamond 'A' = mirror (map mirror ["A"])
+diamond 'B' = mirror (map mirror [" A" ,"B "])
+diamond 'C' = mirror (map mirror ["  A" ," B " ,"C  "])
 
 mirror xs = xs ++ tail (reverse xs)
