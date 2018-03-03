@@ -10,3 +10,9 @@ main = hspec $ do
             diamond 'B'  `shouldBe` [" A "
                                     ,"B B"
                                     ," A "]
+        it "when given a 'C' returns a diamond of size 5" $ do
+            diamond 'C'  `shouldBe` ["  A  "
+                                    ," B B "
+                                    ,"C   C"
+                                    ," B B "
+                                    ,"  A  "]
