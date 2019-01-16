@@ -13,7 +13,8 @@ quickCheckOf s p = do
 main = do
     quickCheckOf "symmetry" $ forAll char $ 
         \c -> let d = diamond c 
-               in d == reverse d && d == map reverse d
+               in d == reverse d 
+               && d == map reverse d
 
     quickCheckOf "starts and ends with a centered A" $ forAll char $
         \c -> let d = diamond c
@@ -25,3 +26,9 @@ main = do
         \c -> let d = diamond c
                   h = length d `div` 2
               in d!!h!!0 == c && (reverse d!!h)!!0 == c 
+
+    quickCheckOf "position of letter depends on index of letter" $ forAll char $
+        \c -> let d = diamond c
+                  h = length d `div` 2
+                  s = map (drop h) (take (h+1) d)
+              in all (\i -> s!!i!!i == ['A'..c]!!i) [0..h] 
