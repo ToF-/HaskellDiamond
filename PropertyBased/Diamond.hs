@@ -2,8 +2,14 @@ module Diamond where
 import Data.Char
 
 diamond :: Char -> [String]
-diamond c = let h = ord c - ord 'A'
-                half = [replicate (h*2+1) p | p <- ['A'..c]] 
-                half'= drop 1 (reverse half)
-            in half ++ half'
+diamond max = mirror half
+    where
+    half     = map mirror pattern
+    mirror s = s ++ drop 1 (reverse s)
+    pattern  = map letter ['A'..max]
+    letter l = let i = index l in spaces (size - i) ++ [l] ++ spaces i
+    index  c = ord c - ord 'A'
+    spaces n = replicate n ' '
+    size     = ord max - ord 'A'
+
     
