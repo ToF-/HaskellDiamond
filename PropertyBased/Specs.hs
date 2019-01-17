@@ -29,4 +29,11 @@ main = do
             ur = take (h+1) (map (drop h) shape)
             ls = zip ['A'..c] [0..]
         in all (\(l,i) -> ur!!i!!i == l) (zip ['A'..'Z'] [0..h])
+    
+    quickCheckOf "has vertical and horizontal simmetry" 
+        $ forAll arbitrary $
+        \(Diamond c s shape) ->
+        let shape' = transpose shape
+        in reverse shape == shape && reverse shape' == shape'
+
             

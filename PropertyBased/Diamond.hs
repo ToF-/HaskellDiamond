@@ -9,5 +9,6 @@ diamond l = let
         where 
         n = ord c - ord 'A'
     spaces x = replicate x ' '
-    half = map ((spaces max)++) ur 
-  in half ++ drop 1 half
+    ul = map (reverse . drop 1) ur
+    half = zipWith (++) ul ur
+  in half ++ drop 1 (reverse half)
