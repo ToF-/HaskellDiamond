@@ -25,9 +25,8 @@ main = do
     quickCheckOf "has a diagonal of letters in upper right corner"
         $ forAll arbitrary $ 
         \(Diamond c s shape) -> 
-        let h = s `div  ` 2 
+        let h = s `div` 2 
             ur = take (h+1) (map (drop h) shape)
-            ls = zip ['A'..c] [0..]
         in all (\(l,i) -> ur!!i!!i == l) (zip ['A'..'Z'] [0..h])
     
     quickCheckOf "has vertical and horizontal simmetry" 
