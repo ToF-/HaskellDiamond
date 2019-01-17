@@ -21,3 +21,12 @@ main = do
     quickCheckOf "has size equal to letter * 2 - 1" 
         $ forAll arbitrary $ 
         \(Diamond c s shape) -> length shape == s
+
+    quickCheckOf "has a diagonal of letters in upper right corner"
+        $ forAll arbitrary $ 
+        \(Diamond c s shape) -> 
+        let h = s `div  ` 2 
+            ur = take (h+1) (map (drop h) shape)
+            ls = zip ['A'..c] [0..]
+        in all (\(l,i) -> ur!!i!!i == l) (zip ['A'..'Z'] [0..h])
+            
